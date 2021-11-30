@@ -1,48 +1,34 @@
-# Import Math
-import math
+import math # import math
 
-# Greet
-print("I can calculate a/b + c/d where a,b,c and d are integers.")
+# Ask the user for a b c and d
+print("I will calculate a/b + c/d")
+a = int(input("a: "))
+b = int(input("b: "))
+c = int(input("c: "))
+d = int(input("d: "))
 
-# Input Loop
-validInput = False
-while validInput == False:
-    try:
-        a = int(input("a:"))
-        b = int(input("b:"))
-        c = int(input("c:"))
-        d = int(input("d:"))
-        if b != 0 and d != 0:
-            print("Thank you, I will add these fractions now")
-            validInput = True
-        elif b==0 or d==0:
-            print("Denominators cannot be zero.")
-    except:
-        print("That is not a number!")
+# Check that you are not dividing by 0
+if b == 0 or d == 0:
+    print("Sorry, can't do that!!!!!")
+    quit()
 
-# Calculate answer
-top = a*d + b*c
-bottom = b*d
-gcd = math.gcd(top,bottom)
+# Calculates the answer simplifed
+numerator = a*d + b*c
+denominator = b*d
+GCD = math.gcd(numerator,denominator)
+numerator /= GCD
+denominator /= GCD
 
-# Divide out common term
-top /= gcd
-bottom /= gcd
+# Checks if the denominator is negative
+if denominator < 0:
+    denominator *= -1
+    numerator *= -1
 
-# Put the minus on the top
-if bottom < 0:
-    top *= -1
-    bottom *= -1
-
-# Make the numbers ints
-top = int(top)
-bottom = int(bottom)
-
-# The answer message
-message = "Answer is "+str(top)+"/"+str(bottom)
-message = message.replace("/1","")
-print(message)
-print("The decimal answer would be", round(top/bottom,4),"to 4 dp.")
+# Checks if the denominator is 1 then prints the answer with the question
+if denominator == 1:
+    print(a,"/",b,"  plus  ",c,"/",d,"   is   ",int(numerator))
+else:
+    print(a,"/",b,"  plus  ",c,"/",d,"   is   ",int(numerator),"/",int(denominator))
 
 # quit
 quit()
